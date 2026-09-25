@@ -1,0 +1,6 @@
+{
+  "name": "SNOWNOOO Studio - Indie Game Studio",
+  "description": "Official website of Snownooo Studio. Crafting heartwarming pastel adventures, cozy simulations, and whimsical cartoon games.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
