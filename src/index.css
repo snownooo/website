@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: 'Fredoka', cursive, sans-serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang TC', 'Microsoft JhengHei', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans TC', 'Noto Sans SC', system-ui, sans-serif;
+  --font-display: 'Fredoka', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang TC', 'Microsoft JhengHei', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans TC', 'Noto Sans SC', system-ui, sans-serif;
 }
 
 body {
@@ -12,8 +12,24 @@ body {
   overflow-x: hidden;
 }
 
-h1, h2, h3, .font-display {
+/* Unified clean modern font for all headings and display classes */
+h1, h2, h3, h4, h5, h6, .font-display {
   font-family: var(--font-display);
+}
+
+/* Ensure all Chinese text uses the clean modern sans font consistently */
+html[lang*="zh"] body,
+html[lang*="zh"] h1,
+html[lang*="zh"] h2,
+html[lang*="zh"] h3,
+html[lang*="zh"] h4,
+html[lang*="zh"] h5,
+html[lang*="zh"] h6,
+html[lang*="zh"] .font-display,
+html[lang*="zh"] button,
+html[lang*="zh"] input,
+html[lang*="zh"] select {
+  font-family: 'Fredoka', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang TC', 'Microsoft JhengHei', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans TC', 'Noto Sans SC', system-ui, sans-serif;
 }
 
 /* Custom delicate cartoon scrollbar */
@@ -48,4 +64,3 @@ h1, h2, h3, .font-display {
 .animate-float-delayed {
   animation: floatGentle 4s ease-in-out infinite 2s;
 }
-

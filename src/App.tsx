@@ -14,8 +14,9 @@ import { GameDetailModal } from './components/GameDetailModal.tsx';
 import { CommunityModal } from './components/CommunityModals.tsx';
 import { WishlistToast } from './components/WishlistToast.tsx';
 import { GameItem } from './data/gamesData.ts';
+import { LanguageProvider } from './context/LanguageContext.tsx';
 
-export default function App() {
+function MainAppContent() {
   const [activeSection, setActiveSection] = useState('hero');
   const [selectedGame, setSelectedGame] = useState<GameItem | null>(null);
   const [wishlistedGame, setWishlistedGame] = useState<GameItem | null>(null);
@@ -68,22 +69,22 @@ export default function App() {
 
       {/* Main Content Sections */}
       <main className="flex-1 w-full">
-        {/* Part 1: Full-Page Featured Game Showcase (Image 1 reference) */}
+        {/* Part 1: Full-Page Featured Game Showcase */}
         <HeroSection
           onWishlistClick={handleWishlistGame}
           onExploreGames={() => handleNavigate('games')}
         />
 
-        {/* Part 2: Our Games Section (Image 2 reference) */}
+        {/* Part 2: Our Games Section */}
         <OurGamesSection
           onSelectGame={(game) => setSelectedGame(game)}
           onWishlistGame={handleWishlistGame}
         />
 
-        {/* Part 3: About Our Company Section (Image 3 reference) */}
+        {/* Part 3: About Our Company Section */}
         <AboutSection />
 
-        {/* Part 4: Contact Section (Placeholder contacts & message form) */}
+        {/* Part 4: Contact Section */}
         <ContactSection />
       </main>
 
@@ -109,5 +110,13 @@ export default function App() {
         onClose={() => setWishlistedGame(null)}
       />
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <MainAppContent />
+    </LanguageProvider>
   );
 }

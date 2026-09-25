@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { GAMES_DATA, GameItem } from '../data/gamesData.ts';
 import { HeroImagePlaceholder } from './GameImagePlaceholder.tsx';
 import { SteamIcon } from './SocialIcons.tsx';
-import { Play, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { useLanguage } from '../context/LanguageContext.tsx';
 
 interface HeroSectionProps {
   onWishlistClick: (game: GameItem) => void;
@@ -14,6 +15,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onWishlistClick,
 }) => {
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const { t } = useLanguage();
   const currentGame = GAMES_DATA[0];
 
   const handleWishlist = () => {
@@ -45,7 +47,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
       {/* Main Center Content: Skyblue Theme Wishlist Now Button */}
       <div className="relative z-10 w-full max-w-5xl mx-auto px-6 flex flex-col items-center text-center pb-20 sm:pb-24">
-        {/* Skyblue Themed WISHLIST NOW Button Block */}
+        {/* Skyblue Themed WISHLIST NOW Button Block with High Contrast White Text */}
         <div 
           onClick={handleWishlist}
           role="button"
@@ -56,30 +58,37 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               handleWishlist();
             }
           }}
-          className="flex items-stretch shadow-2xl shadow-sky-500/30 rounded-xl overflow-hidden border-2 border-sky-300/70 bg-[#071329]/90 backdrop-blur-md transition-all duration-300 hover:border-sky-200 hover:shadow-sky-400/40 hover:scale-[1.02] active:scale-98 cursor-pointer group select-none"
+          className="flex items-stretch shadow-2xl shadow-sky-500/35 rounded-xl overflow-hidden border-2 border-sky-300/80 bg-[#071329]/95 backdrop-blur-md transition-all duration-300 hover:border-sky-200 hover:shadow-sky-400/50 hover:scale-[1.02] active:scale-98 cursor-pointer group select-none ring-1 ring-sky-300/40"
         >
-          {/* Rotating star left block (replaced left arrow) */}
+          {/* Rotating star left block */}
           <div className="bg-[#0b1c3a] px-4 sm:px-5 flex items-center justify-center border-r border-sky-400/40 group-hover:bg-[#0f244a] transition-colors">
-            <Sparkles className="w-5 h-5 text-sky-300 animate-spin" style={{ animationDuration: '6s' }} />
+            <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-sky-300 animate-spin" style={{ animationDuration: '6s' }} />
           </div>
 
-          {/* Skyblue Wishlist Now core button */}
+          {/* Lighter skyblue button background with clearly visible white text */}
           <div
-            className="bg-gradient-to-r from-sky-400 via-sky-300 to-cyan-300 group-hover:from-sky-300 group-hover:to-white text-slate-950 font-display text-sm sm:text-base md:text-lg font-black tracking-widest uppercase px-8 sm:px-14 py-3.5 sm:py-4 transition-all duration-200 flex items-center justify-center shadow-inner"
+            className="bg-gradient-to-r from-sky-400 via-sky-300 to-cyan-300 group-hover:from-sky-300 group-hover:via-sky-200 group-hover:to-cyan-200 font-display text-base sm:text-lg md:text-xl font-black tracking-wider uppercase px-8 sm:px-14 py-4 sm:py-4.5 transition-all duration-200 flex items-center justify-center shadow-inner"
           >
-            <span className="drop-shadow-sm font-extrabold">{isWishlisted ? 'WISHLISTED ON STEAM' : 'WISHLIST NOW'}</span>
+            <span
+              className="font-black text-white tracking-widest"
+              style={{
+                textShadow: '0 1px 2px rgba(3, 44, 90, 0.95), 0 2px 6px rgba(2, 40, 80, 0.8), 0 0 1px rgba(0, 0, 0, 0.9)',
+              }}
+            >
+              {isWishlisted ? t.hero.wishlistedOnSteam : t.hero.wishlistNow}
+            </span>
           </div>
 
           {/* Steam Logo right block */}
           <div className="bg-[#0b1c3a] px-4 sm:px-5 flex items-center justify-center border-l border-sky-400/40 group-hover:bg-[#0f244a] transition-colors">
-            <SteamIcon size={32} className="text-sky-200 group-hover:text-white transition-colors" />
+            <SteamIcon size={32} className="text-white group-hover:text-sky-200 transition-colors drop-shadow" />
           </div>
         </div>
       </div>
 
       {/* Subtle Bottom Scroll Hint */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 opacity-80 hover:opacity-100 transition-opacity pointer-events-none">
-        <span className="text-[10px] tracking-widest uppercase text-sky-200 font-bold drop-shadow">Scroll to explore</span>
+        <span className="text-[10px] tracking-widest uppercase text-sky-200 font-bold drop-shadow">{t.hero.scrollToExplore}</span>
         <div className="w-4 h-7 rounded-full border-2 border-sky-300 flex justify-center p-1 bg-sky-950/40 backdrop-blur-[2px]">
           <div className="w-1 h-2 bg-sky-300 rounded-full animate-bounce" />
         </div>

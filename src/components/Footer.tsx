@@ -2,12 +2,15 @@ import React from 'react';
 import { StudioLogoImg as StudioLogo } from './ImagePlaceholders.tsx';
 import { SteamIcon, DiscordIcon, XIcon, YouTubeIcon } from './SocialIcons.tsx';
 import { ArrowUp, Heart } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext.tsx';
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+  const { language, t } = useLanguage();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -18,16 +21,20 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-sky-950">
           {/* Brand Left */}
           <div className="md:col-span-5 space-y-4">
-            <StudioLogo size={36} showText={true} />
+            <StudioLogo
+              size={36}
+              showText={true}
+              subtitle={language === 'en' ? 'INDIE GAME STUDIO' : '雪落工作室'}
+            />
             <p className="text-xs sm:text-sm text-slate-400 max-w-sm leading-relaxed">
-              Based in Hong Kong, Snownooo Studio is a solo independent developer dedicated to experimental game design and crafting clever, bite-sized games that deliver immediate fun and joy.
+              {t.footer.bio}
             </p>
             <div className="flex items-center gap-3 pt-2">
               <a
                 href="https://store.steampowered.com/curator/45366541"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-sky-950/80 hover:bg-sky-900/80 text-slate-300 hover:text-white flex items-center justify-center transition-all border border-sky-900/40 active:scale-95"
+                className="w-10 h-10 rounded-xl bg-sky-950/80 hover:bg-sky-900/80 text-slate-300 hover:text-white flex items-center justify-center transition-all border border-sky-900/40 active:scale-95 cursor-pointer"
                 aria-label="Steam"
               >
                 <SteamIcon size={24} />
@@ -36,7 +43,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 href="https://discord.gg/mDNhRY7zuR"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-sky-950/80 hover:bg-sky-900/80 text-slate-300 hover:text-white flex items-center justify-center transition-all border border-sky-900/40 active:scale-95"
+                className="w-10 h-10 rounded-xl bg-sky-950/80 hover:bg-sky-900/80 text-slate-300 hover:text-white flex items-center justify-center transition-all border border-sky-900/40 active:scale-95 cursor-pointer"
                 aria-label="Discord"
               >
                 <DiscordIcon size={24} />
@@ -45,7 +52,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 href="https://x.com/snownooo_studio"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-sky-950/80 hover:bg-sky-900/80 text-slate-300 hover:text-white flex items-center justify-center transition-all border border-sky-900/40 active:scale-95"
+                className="w-10 h-10 rounded-xl bg-sky-950/80 hover:bg-sky-900/80 text-slate-300 hover:text-white flex items-center justify-center transition-all border border-sky-900/40 active:scale-95 cursor-pointer"
                 aria-label="X (Twitter)"
               >
                 <XIcon size={24} />
@@ -54,7 +61,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 href="https://www.youtube.com/@SnownoooStudio"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-sky-950/80 hover:bg-sky-900/80 text-slate-300 hover:text-white flex items-center justify-center transition-all border border-sky-900/40 active:scale-95"
+                className="w-10 h-10 rounded-xl bg-sky-950/80 hover:bg-sky-900/80 text-slate-300 hover:text-white flex items-center justify-center transition-all border border-sky-900/40 active:scale-95 cursor-pointer"
                 aria-label="YouTube"
               >
                 <YouTubeIcon size={24} />
@@ -65,39 +72,39 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Quick Nav */}
           <div className="md:col-span-3 space-y-3">
             <h4 className="font-display text-xs font-bold text-white uppercase tracking-widest">
-              Quick Navigation
+              {t.footer.quickNavTitle}
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
                 <button
                   onClick={() => onNavigate('hero')}
-                  className="hover:text-sky-300 transition-colors"
+                  className="hover:text-sky-300 transition-colors cursor-pointer"
                 >
-                  Home / Showcase
+                  {t.footer.navHome}
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => onNavigate('games')}
-                  className="hover:text-sky-300 transition-colors"
+                  className="hover:text-sky-300 transition-colors cursor-pointer"
                 >
-                  Our Games
+                  {t.footer.navGames}
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => onNavigate('about')}
-                  className="hover:text-sky-300 transition-colors"
+                  className="hover:text-sky-300 transition-colors cursor-pointer"
                 >
-                  About
+                  {t.footer.navAbout}
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => onNavigate('contact')}
-                  className="hover:text-sky-300 transition-colors"
+                  className="hover:text-sky-300 transition-colors cursor-pointer"
                 >
-                  Newsletter & Contact
+                  {t.footer.navContact}
                 </button>
               </li>
             </ul>
@@ -106,19 +113,19 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Studio Details */}
           <div className="md:col-span-4 space-y-3">
             <h4 className="font-display text-xs font-bold text-white uppercase tracking-widest">
-              Studio Details
+              {t.footer.studioDetailsTitle}
             </h4>
             <div className="text-xs text-slate-400 leading-relaxed space-y-1">
-              <p className="font-semibold text-slate-200">Snownooo Studio</p>
-              <p>Solo Independent Game Developer</p>
-              <p>Based in Hong Kong</p>
+              <p className="font-semibold text-slate-200">{t.footer.studioName}</p>
+              <p>{t.footer.soloDevLabel}</p>
+              <p>{t.footer.locationLabel}</p>
               <p>
-                Direct Contact: <a href="mailto:snownooostudio@gmail.com" className="text-sky-300 hover:underline">snownooostudio@gmail.com</a>
+                {t.footer.contactLabel} <a href="mailto:snownooostudio@gmail.com" className="text-sky-300 hover:underline">snownooostudio@gmail.com</a>
               </p>
             </div>
             <div className="pt-2">
               <span className="text-[11px] text-slate-500 block leading-relaxed">
-                All game titles, characters, logos, and original artwork are created by and property of Snownooo Studio. All rights reserved.
+                {t.footer.legalNotice}
               </span>
             </div>
           </div>
@@ -127,16 +134,16 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         {/* Bottom Bar with Back to Top */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div className="flex items-center gap-1.5">
-            <span>© {new Date().getFullYear()} Snownooo Studio. Crafted with</span>
+            <span>© {new Date().getFullYear()} {t.footer.craftedWith}</span>
             <Heart size={13} className="text-rose-400 fill-rose-400 inline" />
-            <span>for players worldwide.</span>
+            <span>{t.footer.forPlayers}</span>
           </div>
 
           <button
             onClick={scrollToTop}
             className="flex items-center gap-1.5 text-xs font-bold text-sky-400 hover:text-sky-200 transition-colors py-1 px-3 rounded-lg bg-sky-950/40 hover:bg-sky-900/60 border border-sky-800/30 cursor-pointer"
           >
-            <span>Back to top</span>
+            <span>{t.footer.backToTop}</span>
             <ArrowUp size={13} />
           </button>
         </div>

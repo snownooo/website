@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Mail, CheckCircle2, Copy, Check, Sparkles, Gamepad2, ShieldCheck } from 'lucide-react';
 import { SteamIcon, DiscordIcon, XIcon, YouTubeIcon } from './SocialIcons.tsx';
+import { useLanguage } from '../context/LanguageContext.tsx';
 
 export const ContactSection: React.FC = () => {
+  const { t } = useLanguage();
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -75,20 +77,20 @@ export const ContactSection: React.FC = () => {
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-400/25 mb-3">
             <Sparkles size={12} className="text-sky-300" />
             <span className="text-xs font-bold tracking-widest text-sky-300 uppercase">
-              GET IN TOUCH
+              {t.contact.badge}
             </span>
           </div>
           <h2 className="font-display text-3xl sm:text-5xl font-black tracking-wide text-white uppercase">
-            CONTACT & <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-cyan-200">COMMUNITY</span>
+            {t.contact.headingPrefix} <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-cyan-200">{t.contact.headingHighlight}</span>
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-300">
-            Sign up for the latest game updates, connect across our official channels, or reach out directly.
+            {t.contact.subtitle}
           </p>
         </div>
 
-        {/* Content Grid: Left Panels & Newsletter Right (Aligned Bottoms) */}
+        {/* Content Grid: Left Panels & Newsletter Right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
-          {/* Left Column: Direct Inquiries & Community (Aligned with Newsletter) */}
+          {/* Left Column: Direct Inquiries & Community */}
           <div className="lg:col-span-5 flex flex-col justify-between gap-4 h-full">
             {/* Primary Email Card with Quick Copy */}
             <div className="p-5 sm:p-6 bg-[#0f1b38] rounded-2xl border border-sky-800/40 shadow-xl relative overflow-hidden group">
@@ -104,19 +106,19 @@ export const ContactSection: React.FC = () => {
                   {copiedEmail ? (
                     <>
                       <Check size={13} className="text-emerald-400" />
-                      <span className="text-emerald-400 font-bold">Copied!</span>
+                      <span className="text-emerald-400 font-bold">{t.contact.copied}</span>
                     </>
                   ) : (
                     <>
                       <Copy size={13} />
-                      <span>Copy</span>
+                      <span>{t.contact.copy}</span>
                     </>
                   )}
                 </button>
               </div>
 
               <div className="mt-3.5">
-                <span className="text-xs font-bold uppercase tracking-wider text-sky-400">Official Studio Email</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-sky-400">{t.contact.emailLabel}</span>
                 <a
                   href={`mailto:${studioEmail}`}
                   className="block mt-1 font-display text-lg sm:text-xl font-bold text-white hover:text-sky-300 transition-colors break-all"
@@ -124,7 +126,7 @@ export const ContactSection: React.FC = () => {
                   {studioEmail}
                 </a>
                 <p className="mt-1 text-xs text-slate-400">
-                  Open for publishing inquiries, co-development, media requests, and developer relations.
+                  {t.contact.emailDesc}
                 </p>
               </div>
             </div>
@@ -134,32 +136,32 @@ export const ContactSection: React.FC = () => {
               <div className="p-4 bg-[#0d172e] rounded-xl border border-sky-900/40 flex flex-col justify-between">
                 <div className="flex items-center gap-2 text-sky-300 mb-1">
                   <Gamepad2 size={16} />
-                  <span className="text-xs font-bold uppercase tracking-wider">Review Keys</span>
+                  <span className="text-xs font-bold uppercase tracking-wider">{t.contact.reviewKeysTitle}</span>
                 </div>
                 <p className="text-xs text-slate-300">
-                  Streamers & journalists can request preview builds directly via email.
+                  {t.contact.reviewKeysDesc}
                 </p>
               </div>
 
               <div className="p-4 bg-[#0d172e] rounded-xl border border-sky-900/40 flex flex-col justify-between">
                 <div className="flex items-center gap-2 text-cyan-300 mb-1">
                   <ShieldCheck size={16} />
-                  <span className="text-xs font-bold uppercase tracking-wider">Player Support</span>
+                  <span className="text-xs font-bold uppercase tracking-wider">{t.contact.supportTitle}</span>
                 </div>
                 <p className="text-xs text-slate-300">
-                  Bug reports, feedback, and gameplay questions welcome anytime.
+                  {t.contact.supportDesc}
                 </p>
               </div>
             </div>
 
-            {/* Social & Community Hub (CONNECT - Styled matching reference image tiles) */}
+            {/* Social & Community Hub */}
             <div className="p-5 sm:p-6 bg-[#0f1b38]/70 rounded-2xl border border-sky-900/40 flex-1 flex flex-col justify-center">
               <div className="mb-3">
                 <span className="text-sm font-display font-black uppercase tracking-wider text-white block">
-                  CONNECT
+                  {t.contact.connectTitle}
                 </span>
                 <p className="text-xs text-slate-400 mt-0.5">
-                  Follow us on social media and stay tuned for the latest updates!
+                  {t.contact.connectDesc}
                 </p>
               </div>
 
@@ -168,7 +170,7 @@ export const ContactSection: React.FC = () => {
                   href="https://store.steampowered.com/curator/45366541"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center justify-center group"
+                  className="flex flex-col items-center justify-center group cursor-pointer"
                 >
                   <div
                     className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-[#070e1f] hover:bg-sky-950/80 border border-slate-800 hover:border-sky-400/50 text-slate-200 hover:text-white transition-all shadow-md group-hover:scale-105"
@@ -187,7 +189,7 @@ export const ContactSection: React.FC = () => {
                   href="https://discord.gg/mDNhRY7zuR"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center justify-center group"
+                  className="flex flex-col items-center justify-center group cursor-pointer"
                 >
                   <div
                     className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-[#070e1f] hover:bg-indigo-950/80 border border-slate-800 hover:border-indigo-400/50 text-slate-200 hover:text-white transition-all shadow-md group-hover:scale-105"
@@ -206,7 +208,7 @@ export const ContactSection: React.FC = () => {
                   href="https://x.com/snownooo_studio"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center justify-center group"
+                  className="flex flex-col items-center justify-center group cursor-pointer"
                 >
                   <div
                     className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-[#070e1f] hover:bg-sky-950/80 border border-slate-800 hover:border-sky-400/50 text-slate-200 hover:text-white transition-all shadow-md group-hover:scale-105"
@@ -225,7 +227,7 @@ export const ContactSection: React.FC = () => {
                   href="https://www.youtube.com/@SnownoooStudio"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col items-center justify-center group"
+                  className="flex flex-col items-center justify-center group cursor-pointer"
                 >
                   <div
                     className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center bg-[#070e1f] hover:bg-rose-950/80 border border-slate-800 hover:border-rose-400/50 text-slate-200 hover:text-white transition-all shadow-md group-hover:scale-105"
@@ -243,7 +245,7 @@ export const ContactSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Sign Up To Newsletter (Aligned with Left Panel) */}
+          {/* Right Column: Sign Up To Newsletter */}
           <div className="lg:col-span-7 bg-[#0b152d] p-6 sm:p-8 lg:p-10 rounded-2xl border border-sky-800/40 shadow-2xl relative overflow-hidden flex flex-col justify-between h-full">
             {/* Soft Ambient Background Glow */}
             <div className="absolute top-0 right-0 w-80 h-80 bg-sky-500/5 rounded-full blur-3xl pointer-events-none" />
@@ -254,11 +256,12 @@ export const ContactSection: React.FC = () => {
                   <CheckCircle2 size={36} />
                 </div>
                 <h3 className="font-display text-3xl font-black text-white uppercase tracking-wider">
-                  YOU'RE ON THE LIST!
+                  {t.contact.successTitle}
                 </h3>
                 <p className="text-sm sm:text-base text-slate-300 max-w-md mx-auto leading-relaxed">
-                  Thank you for subscribing! We've registered{' '}
-                  <span className="text-sky-300 font-semibold">{newsletterData.email}</span>. You will receive all the latest news, playtest invitations, and offers direct from the source!
+                  {t.contact.successDescPrefix}
+                  <span className="text-sky-300 font-semibold">{newsletterData.email}</span>
+                  {t.contact.successDescSuffix}
                 </p>
                 <div className="pt-4">
                   <button
@@ -268,7 +271,7 @@ export const ContactSection: React.FC = () => {
                     }}
                     className="px-6 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-display text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
                   >
-                    Subscribe Another Email
+                    {t.contact.subscribeAnother}
                   </button>
                 </div>
               </div>
@@ -276,10 +279,10 @@ export const ContactSection: React.FC = () => {
               <form onSubmit={handleNewsletterSubmit} className="flex flex-col justify-between h-full space-y-6 relative z-10">
                 <div>
                   <h3 className="font-display text-3xl sm:text-4xl md:text-5xl font-black text-white uppercase tracking-tight">
-                    NEWSLETTER
+                    {t.contact.newsletterTitle}
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm text-slate-300/90 leading-relaxed max-w-xl">
-                    Sign up to the Snownooo newsletter for all the latest news and offers direct from the source. No spam, ever, we promise!
+                    {t.contact.newsletterSubtitle}
                   </p>
                 </div>
 
@@ -287,11 +290,11 @@ export const ContactSection: React.FC = () => {
                   {/* YOUR NAME */}
                   <div>
                     <label className="block text-xs font-display font-black uppercase tracking-widest text-slate-200 mb-2">
-                      YOUR NAME
+                      {t.contact.nameLabel}
                     </label>
                     <input
                       type="text"
-                      placeholder="ENTER YOUR NAME HERE"
+                      placeholder={t.contact.namePlaceholder}
                       value={newsletterData.name}
                       onChange={(e) => setNewsletterData({ ...newsletterData, name: e.target.value })}
                       className="w-full px-4 py-3 rounded-md bg-[#070e1f] border border-sky-900/60 focus:border-sky-400 focus:outline-none text-sm text-white placeholder-slate-500 tracking-wider transition-colors"
@@ -301,12 +304,12 @@ export const ContactSection: React.FC = () => {
                   {/* EMAIL ADDRESS * */}
                   <div>
                     <label className="block text-xs font-display font-black uppercase tracking-widest text-slate-200 mb-2">
-                      EMAIL ADDRESS *
+                      {t.contact.emailInputLabel}
                     </label>
                     <input
                       type="email"
                       required
-                      placeholder="E.G. YOURNAME@EXAMPLE.COM"
+                      placeholder={t.contact.emailPlaceholder}
                       value={newsletterData.email}
                       onChange={(e) => setNewsletterData({ ...newsletterData, email: e.target.value })}
                       className="w-full px-4 py-3 rounded-md bg-[#070e1f] border border-sky-900/60 focus:border-sky-400 focus:outline-none text-sm text-white placeholder-slate-500 tracking-wider transition-colors"
@@ -316,7 +319,7 @@ export const ContactSection: React.FC = () => {
                   {/* I'M A... */}
                   <div>
                     <label className="block text-xs font-display font-black uppercase tracking-widest text-slate-200 mb-2">
-                      I'M A...
+                      {t.contact.roleLabel}
                     </label>
                     <div className="relative">
                       <select
@@ -324,13 +327,13 @@ export const ContactSection: React.FC = () => {
                         onChange={(e) => setNewsletterData({ ...newsletterData, role: e.target.value })}
                         className="w-full px-4 py-3 rounded-md bg-[#070e1f] border border-sky-900/60 focus:border-sky-400 focus:outline-none text-sm text-white transition-colors cursor-pointer appearance-none uppercase tracking-wider"
                       >
-                        <option value="" className="bg-[#070e1f] text-slate-400">SELECT AN OPTION...</option>
-                        <option value="Gamer / Player" className="bg-[#070e1f] text-white">GAMER / PLAYER</option>
-                        <option value="Content Creator / Streamer" className="bg-[#070e1f] text-white">CONTENT CREATOR / STREAMER</option>
-                        <option value="Journalist / Press" className="bg-[#070e1f] text-white">JOURNALIST / PRESS</option>
-                        <option value="Game Developer" className="bg-[#070e1f] text-white">GAME DEVELOPER</option>
-                        <option value="Industry Partner" className="bg-[#070e1f] text-white">INDUSTRY PARTNER</option>
-                        <option value="Other" className="bg-[#070e1f] text-white">OTHER</option>
+                        <option value="" className="bg-[#070e1f] text-slate-400">{t.contact.roleSelectPlaceholder}</option>
+                        <option value="Gamer / Player" className="bg-[#070e1f] text-white">{t.contact.roles.player}</option>
+                        <option value="Content Creator / Streamer" className="bg-[#070e1f] text-white">{t.contact.roles.creator}</option>
+                        <option value="Journalist / Press" className="bg-[#070e1f] text-white">{t.contact.roles.press}</option>
+                        <option value="Game Developer" className="bg-[#070e1f] text-white">{t.contact.roles.developer}</option>
+                        <option value="Industry Partner" className="bg-[#070e1f] text-white">{t.contact.roles.partner}</option>
+                        <option value="Other" className="bg-[#070e1f] text-white">{t.contact.roles.other}</option>
                       </select>
                       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
                         <svg className="h-4 w-4 fill-current" viewBox="0 0 20 20">
@@ -341,7 +344,7 @@ export const ContactSection: React.FC = () => {
                   </div>
                 </div>
 
-                {/* SIGN UP BUTTON (Beveled corner like reference image) */}
+                {/* SIGN UP BUTTON */}
                 <div className="pt-2 flex justify-center">
                   <button
                     type="submit"
@@ -351,7 +354,7 @@ export const ContactSection: React.FC = () => {
                       clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%)',
                     }}
                   >
-                    {isSubmitting ? 'SIGNING UP...' : 'SIGN UP'}
+                    {isSubmitting ? t.contact.submittingButton : t.contact.submitButton}
                   </button>
                 </div>
               </form>

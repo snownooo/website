@@ -1,9 +1,15 @@
 import React from 'react';
 
 // Studio logo image with fallback
-export const StudioLogoImg: React.FC<{ size?: number; showText?: boolean; className?: string }> = ({
+export const StudioLogoImg: React.FC<{
+  size?: number;
+  showText?: boolean;
+  subtitle?: string;
+  className?: string;
+}> = ({
   size = 40,
   showText = true,
+  subtitle = 'INDIE GAME STUDIO',
   className = '',
 }) => {
   return (
@@ -26,12 +32,12 @@ export const StudioLogoImg: React.FC<{ size?: number; showText?: boolean; classN
       </div>
 
       {showText && (
-        <div className="flex flex-col">
-          <span className="font-display text-xl font-bold tracking-wider text-white drop-shadow-sm">
+        <div className="flex flex-col justify-center">
+          <span className="font-display text-xl sm:text-[22px] font-bold tracking-wider text-white drop-shadow-sm leading-tight">
             SNOW<span className="text-sky-300">NOOO</span>
           </span>
-          <span className="text-[10px] font-semibold tracking-widest text-sky-200/80 uppercase">
-            INDIE GAME STUDIO
+          <span className="text-[13px] font-bold tracking-wider text-sky-200 mt-0.5 leading-tight uppercase">
+            {subtitle}
           </span>
         </div>
       )}
