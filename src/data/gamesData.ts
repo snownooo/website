@@ -1,3 +1,5 @@
+import { Language } from '../context/LanguageContext.tsx';
+
 export interface GameItem {
   id: string;
   title: string;
@@ -14,9 +16,11 @@ export interface GameItem {
   bannerTheme: string;
   featured: boolean;
   artType: 'hero-sleuth' | 'farm-rebirth' | 'house-spirits' | 'teatopia' | 'babel' | 'lonestar' | 'neonsea';
-  imagePath: string; // Direct path for user PNG (e.g. /images/hero-bg.png)
-  heroBgPath?: string; // Direct path for full-screen hero image
+  imagePath: string;
+  heroBgPath?: string;
   placeholderFallback: string;
+  // Localized image paths dictionary
+  localizedHeroImages?: Record<Language, string>;
   trailerUrl?: string;
   features: string[];
 }
@@ -40,6 +44,12 @@ export const GAMES_DATA: GameItem[] = [
     imagePath: '/images/hero-bg.png',
     heroBgPath: '/images/hero-bg.png',
     placeholderFallback: '/images/hero-bg.png',
+    // Add the localized dictionary here:
+    localizedHeroImages: {
+      en: '/images/hero-bg.png',
+      'zh-Hans': '/images/hero-bg-schin.png',
+      'zh-Hant': '/images/hero-bg-tchin.png',
+    },
     trailerUrl: 'https://store.steampowered.com/app/3424940/_/',
     features: [
       '50+ unlockable prizes and obstacles to rig your machine',

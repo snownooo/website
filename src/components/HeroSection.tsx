@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { GAMES_DATA, GameItem } from '../data/gamesData.ts';
-import { HeroImagePlaceholder } from './GameImagePlaceholder.tsx';
 import { SteamIcon } from './SocialIcons.tsx';
 import { Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -15,11 +14,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onWishlistClick,
 }) => {
   const [isWishlisted, setIsWishlisted] = useState(false);
-  const { t } = useLanguage();
+  
+  // language will be 'en' | 'zh-Hant' | 'zh-Hans'
+  const { t, language } = useLanguage();
   const currentGame = GAMES_DATA[0];
 
+  // Map the language directly to your images in /public/images/
+  const getHeroBg = () => {
+    switch (language) {
+      case 'zh-Hans':
+        return '/images/hero-bg-schin.png';
+      case 'zh-Hant':
+        return '/images/hero-bg-tchin.png';
+      case 'en':
+      default:
+        return '/images/hero-bg.png';
+    }
+  };
+
   const handleWishlist = () => {
-    // Trigger celebratory skyblue confetti
     confetti({
       particleCount: 80,
       spread: 65,
@@ -30,7 +43,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     setIsWishlisted(true);
     onWishlistClick(currentGame);
 
-    // Redirect to Steam page directly
     window.open('https://store.steampowered.com/app/3424940/_/', '_blank', 'noopener,noreferrer');
   };
 
@@ -40,14 +52,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       className="relative w-full h-screen min-h-[600px] flex items-end justify-center overflow-hidden bg-[#070e20]"
       aria-label="Featured Game Showcase"
     >
-      {/* Background Image (Loads /public/images/hero-bg.png) */}
-      <div className="absolute inset-0 w-full h-full">
-        <HeroImagePlaceholder game={currentGame} className="w-full h-full" />
+      {/* Dynamic Background Image */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none select-none">
+        <img
+          key={language} /* Forces a clean fade/render transition when language changes */
+          src={getHeroBg()}
+          alt="Prize Denied Hero Background"
+          className="w-full h-full object-cover object-center"
+        />
+        {/* Readability gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#070e20] via-transparent to-black/30" />
       </div>
 
-      {/* Main Center Content: Skyblue Theme Wishlist Now Button */}
+      {/* Main Center Content: Wishlist Button */}
       <div className="relative z-10 w-full max-w-5xl mx-auto px-6 flex flex-col items-center text-center pb-20 sm:pb-24">
-        {/* Skyblue Themed WISHLIST NOW Button Block with High Contrast White Text */}
         <div 
           onClick={handleWishlist}
           role="button"
@@ -65,7 +83,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-sky-300 animate-spin" style={{ animationDuration: '6s' }} />
           </div>
 
-          {/* Lighter skyblue button background with clearly visible white text */}
+          {/* Button Text */}
           <div
             className="bg-gradient-to-r from-sky-400 via-sky-300 to-cyan-300 group-hover:from-sky-300 group-hover:via-sky-200 group-hover:to-cyan-200 font-display text-base sm:text-lg md:text-xl font-black tracking-wider uppercase px-8 sm:px-14 py-4 sm:py-4.5 transition-all duration-200 flex items-center justify-center shadow-inner"
           >
